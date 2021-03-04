@@ -2,13 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const port = process.env.PORT || 3001;
 const app = express();
-const users = require('./data/users');
+const customers = require('./data/customers');
 const rooms = require('./data/rooms');
 const bookings = require('./data/bookings');
 
 app.locals = {
   title: 'Overlook API',
-  users,
+  customers,
   rooms,
   bookings,
 }
@@ -21,24 +21,24 @@ const isValidDate = dateString => {
   return regEx.test(dateString);
 }
 
-app.get('/api/v1/users', (req, res) => {
-  const { users } = app.locals;
-  res.status(200).json({ users });
+app.get('/api/v1/customers', (req, res) => {
+  const { customers } = app.locals;
+  res.status(200).json({ customers });
 });
 
-app.get('/api/v1/users/:id', (req, res) => {
+app.get('/api/v1/customers/:id', (req, res) => {
   const { id } = req.params;
-  const { users } = app.locals;
+  const { customers } = app.locals;
 
-  let requestedUser = users.find(user => user.id == id);
+  let requestedCustomer = customers.find(customer => customer.id == id);
 
-  if (!requestedUser) {
+  if (!requestedCustomer) {
     return res.status(404).json({
-      message: `No user found with an id of ${id}`
+      message: `No customer found with an id of ${id}`
     });
   }
 
-  res.status(200).json(requestedUser);
+  res.status(200).json(requestedCustomer);
 });
 
 app.get('/api/v1/rooms', (req, res) => {
