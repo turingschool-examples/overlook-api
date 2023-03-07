@@ -127,3 +127,5 @@ app.delete('/api/v1/bookings/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`${app.locals.title} is now running on http://localhost:${port} !`)
 });
+
+module.exports = app;
